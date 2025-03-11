@@ -18,7 +18,7 @@ limitations under the License.
 -->
 <mujoco model="right_faive">
 
-    <body name="root">
+    <body name="worldBody">
         <!-- so that the base can be colored separately in IsaacGym, make it into its own body -->
         <geom mesh="base" rgba="0.2 0.2 0.2 1"/>
         <body name="palm">
@@ -106,7 +106,7 @@ limitations under the License.
                                 </body>
                             </body>
                         </body>
-                    </body>index
+                    </body>
                 </body>
             </body>
 

@@ -3,6 +3,7 @@ import gymnasium as gym
 # Import submodules
 
 # Register environments
+# ONLY needed when using RL Environements and Mimic Environments
 gym.register(
     id="Isaac-Franka-Panda-Direct-v0",
     entry_point=f"{__name__}.franka_panda_env:FrankaPandaEnv",
