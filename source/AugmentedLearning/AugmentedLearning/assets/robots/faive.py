@@ -4,6 +4,7 @@ from isaaclab.assets import ArticulationCfg
 from isaaclab.utils.assets import ISAACLAB_NUCLEUS_DIR
 
 FAIVE_CFG = ArticulationCfg(
+    prim_path="/World/envs/env_.*/Robot",
     spawn=sim_utils.UsdFileCfg(
         usd_path="/home/riccardo/CodingProjects/IsaacLabProjects/AugmentedLearning/source/AugmentedLearning/AugmentedLearning/descriptions/faive_hand_p0/faive_hand.usd",
         activate_contact_sensors=False,
@@ -34,39 +35,34 @@ FAIVE_CFG = ArticulationCfg(
 
     actuators={
         "thumb": ImplicitActuatorCfg(
-            joint_names_expr=["thumb_base2pp", "thumb_pp2mp"],
-            effort_limit=87.0,
-            velocity_limit=2.175,
-            stiffness=80.0,
-            damping=4.0,
+            joint_names_expr=["root2thumb_base", "thumb_base2pp", "thumb_pp2mp"],
+            effort_limit_sim=87.0,
+            stiffness=2.0,
+            damping=0.05,
         ),
         "index": ImplicitActuatorCfg(
             joint_names_expr=["root2index_pp", "index_pp2mp"],
-            effort_limit=87.0,
-            velocity_limit=2.175,
-            stiffness=80.0,
-            damping=4.0,
+            effort_limit_sim=87.0,
+            stiffness=2.0,
+            damping=0.05,
         ),
         "middle": ImplicitActuatorCfg(
             joint_names_expr=["root2middle_pp", "middle_pp2mp"],
-            effort_limit=87.0,
-            velocity_limit=2.175,
-            stiffness=80.0,
-            damping=4.0,
+            effort_limit_sim=87.0,
+            stiffness=2.0,
+            damping=0.05,
         ),
         "ring": ImplicitActuatorCfg(
             joint_names_expr=["root2ring_pp", "ring_pp2mp"],
-            effort_limit=87.0,
-            velocity_limit=2.175,
-            stiffness=80.0,
-            damping=4.0,
+            effort_limit_sim=87.0,
+            stiffness=2.0,
+            damping=0.05,
         ),
         "pinky": ImplicitActuatorCfg(
             joint_names_expr=["root2pinky_pp", "pinky_pp2mp"],
-            effort_limit=87.0,
-            velocity_limit=2.175,
-            stiffness=80.0,
-            damping=4.0,
+            effort_limit_sim=87.0,
+            stiffness=2.0,
+            damping=0.05,
         ),
     }
 )

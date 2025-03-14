@@ -10,6 +10,7 @@ app_launcher = AppLauncher(args_cli)
 simulation_app = app_launcher.app
 
 import torch
+import math
 import isaaclab.sim as sim_utils
 from AugmentedLearning.tasks.manipulation.franka_panda.franka_panda_env import FrankaPandaEnvCfg
 from isaaclab.sim import SimulationContext
@@ -20,6 +21,8 @@ def run_simulator(sim: SimulationContext, scene: InteractiveScene):
     robot = scene["franka_panda"]
     sim_dt = sim.get_physics_dt()
     count = 0
+    amplitude = 2.0
+    frequency = 0.5
 
     while simulation_app.is_running():
         if count % 500 == 0:
@@ -30,9 +33,16 @@ def run_simulator(sim: SimulationContext, scene: InteractiveScene):
             robot.write_joint_state_to_sim(joint_pos, joint_vel)
             scene.reset()
             print("Resetting robot state!")
-        
-        efforts = torch.randn_like(robot.data.joint_pos) * 2.0
-        robot.set_joint_effort_target(efforts)
+
+        time = count * sim_dt
+        input = torch.tensor([2 * math.pi * frequency * time], device=args_cli.device)
+        sinusoidal_position = amplitude * torch.sin(input)
+
+        target_pos = joint_pos.clone()
+        target_pos += sinusoidal_position
+        robot.set_joint_position_target(target_pos)        
+        # efforts = torch.randn_like(robot.data.joint_pos) * 2.0
+        # robot.set_joint_effort_target(efforts)
         scene.write_data_to_sim()
         sim.step()
         count += 1
